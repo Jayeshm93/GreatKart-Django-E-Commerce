@@ -15,10 +15,6 @@ class Product(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
-    # class Meta:
-    #     verbose_name = 'product'
-    #     verbose_name_plural = 'products'
-
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
 

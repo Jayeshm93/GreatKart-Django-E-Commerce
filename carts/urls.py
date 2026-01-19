@@ -1,0 +1,14 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.cart, name='cart'),
+    # Add in cart
+    path('add_cart/<int:product_id>', views.add_cart, name='add_cart'),
+    # Remove cart
+    path('remove_cart/<int:product_id>', views.remove_cart, name='remove_cart'),
+    # remove cart item
+    path('remove_cart_item/<int:product_id>', views.remove_cart_item, name='remove_cart_item'),
+
+]
+

@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'greatkart.urls'
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
                 'category.context_processors.menu_links',
                 'carts.context_processors.counter',
             ],
@@ -136,6 +138,22 @@ STATICFILES_DIRS = [
 # Media files config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+
+# SMTP server configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'          # For Gmail
+EMAIL_PORT = 587                        # TLS port
+EMAIL_USE_TLS = True                    # Use TLS
+EMAIL_USE_SSL = False                   # Set False if using TLS
+EMAIL_HOST_USER = 'jayeshmahajan018@gmail.com'       # Your email
+EMAIL_HOST_PASSWORD = 'ftpd mjmy nwyf mkfg'    # App password (recommended)
 
 
 # Default primary key field type

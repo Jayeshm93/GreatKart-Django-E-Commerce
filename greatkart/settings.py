@@ -152,8 +152,8 @@ EMAIL_HOST = 'smtp.gmail.com'          # For Gmail
 EMAIL_PORT = 587                        # TLS port
 EMAIL_USE_TLS = True                    # Use TLS
 EMAIL_USE_SSL = False                   # Set False if using TLS
-EMAIL_HOST_USER = 'jayeshmahajan018@gmail.com'       # Your email
-EMAIL_HOST_PASSWORD = 'ftpd mjmy nwyf mkfg'    # App password (recommended)
+EMAIL_HOST_USER = 'your@gmail.com'       # Your email
+EMAIL_HOST_PASSWORD = 'your_password'    # App password (recommended)
 
 
 # Default primary key field type

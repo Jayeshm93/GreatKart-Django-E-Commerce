@@ -19,6 +19,7 @@ class MyAccountManager(BaseUserManager):
             phone_number=phone_number,
         )
 
+        user.is_active = True  # To make active user during register
         user.set_password(password)
         user.save(using=self._db)
         return user

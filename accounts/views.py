@@ -5,6 +5,7 @@ from .models import Account
 from django.contrib import messages, auth
 from carts.models import CartItem, Cart
 from carts.views import _cart_id
+import requests
 
 # Verification email
 from django.contrib.sites.shortcuts import get_current_site
@@ -44,7 +45,7 @@ def register(request):
             # send_email = EmailMessage(mail_subject, message, to=[to_email])
             # send_email.send()
             messages.success(request, 'Registration successful')
-            return redirect('register')
+            return redirect('login')
     else:
         form = RegistrationForm()
 
@@ -60,7 +61,9 @@ def login(request):
         password = request.POST['password']
 
         user = auth.authenticate(email=email, password=password)
+
         if user is not None:
+            # This code for pass added cart items ot cart -> while login
             try:
                 # Check cart is exist or not
                 cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -68,10 +71,9 @@ def login(request):
                 is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
                 if is_cart_item_exists:
                     cart_item = CartItem.objects.filter(cart=cart)
-
                     for item in cart_item:
-                        # item.user =
-                        pass
+                        item.user = user
+                        item.save()
             except:
                 pass
 
@@ -88,7 +90,7 @@ def login(request):
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
-    messages.success(request, "You are logged out.")
+    messages.error(request, "You are logged out.")
     return redirect('login')
 
 

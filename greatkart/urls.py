@@ -24,8 +24,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
 
+    # Home page
+    path('', home, name='home'),
     # Store page
     path('store/', include('store.urls')),
     # Carts page

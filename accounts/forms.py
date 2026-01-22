@@ -14,7 +14,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password']
 
     # Apply class and placeholder on all field instead of 1 by 1
     def __init__(self, *args, **kwargs):

@@ -34,8 +34,15 @@ def store(request, category_slug=None):
 
 def product_detail(request, category_slug, product_slug):
     try:
+        curr_user = request.user
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug, is_available=True)
-        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
+
+        # If the user is authenticated
+        if curr_user.is_authenticated:
+            in_cart = CartItem.objects.filter(user=curr_user, product=single_product).exists()
+        # If the user is not authenticated
+        else:
+            in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product=single_product).exists()
     except Exception as e:
         raise e
 

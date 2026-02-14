@@ -23,6 +23,7 @@ from django.conf import settings
 
 
 urlpatterns = [
+    # Admin
     path('admin/', admin.site.urls),
 
     # Home page

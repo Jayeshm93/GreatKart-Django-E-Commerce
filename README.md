@@ -87,11 +87,15 @@ GreatKart-Django-E-Commerce/
    ```bash
    python manage.py createsuperuser
 
-6. **Run Development Server**
+6. **Run collectstatic**
+   ```bash
+   python manage.py collectstatic 
+   
+7. **Run Development Server**
    ```bash
    python manage.py runserver
 
-7. **Access the App**
+8. **Access the App**
    ```bash
    # Frontend
    http://127.0.0.1:8000/

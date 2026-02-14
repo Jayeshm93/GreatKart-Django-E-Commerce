@@ -6,11 +6,15 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy project
+COPY . /app
 
-RUN python manage.py collectstatic --noinput
+# Create STATIC_ROOT directory and collect static files
+RUN mkdir -p /app/staticfiles && python manage.py collectstatic --noinput
 
-CMD gunicorn greatkart.wsgi:application --bind 0.0.0.0:8000
+# Run Gunicorn
+CMD ["gunicorn", "greatkart.wsgi:application", "--bind", "0.0.0.0:8000"]

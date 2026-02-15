@@ -27,10 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-# ALLOWED_HOSTS = []
+
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
@@ -116,52 +115,25 @@ AUTH_USER_MODEL = 'accounts.Account'
 # }
 
 # This is for PostgreSQL
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': config('DB_PORT', cast=int),
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
-        conn_max_age=600,
-        # ssl_require=False,
-        ssl_require=True # On Render, for Prod.
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', cast=int),
+    }
 }
 
-from urllib.parse import urlparse
-
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'HOST': config('DB_HOST'),
-#             'PORT': config('DB_PORT'),
-#         }
-#     }
-# else:
-#     # Production DB from Render
-#     result = urlparse(config('DATABASE_URL'))
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': result.path[1:],
-#             'USER': result.username,
-#             'PASSWORD': result.password,
-#             'HOST': result.hostname,
-#             'PORT': result.port,
-#         }
-#     }
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL'),
+#         conn_max_age=600,
+#         # ssl_require=False,
+#         ssl_require=True # On Render, for Prod.
+#     )
+# }
 
 
 # Password validation
@@ -198,15 +170,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Static files
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'static'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = []
 # STATICFILES_DIRS = [
 #     'greatkart/static',
 # ]
-STATICFILES_DIRS = [
-    BASE_DIR / 'greatkart' / 'static',
-]
 
 
 # Media files config

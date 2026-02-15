@@ -30,7 +30,6 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # DEBUG = True
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
@@ -128,41 +127,41 @@ AUTH_USER_MODEL = 'accounts.Account'
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL'),
-#         conn_max_age=600,
-#         ssl_require=False,
-#         # ssl_require=True # On Render, for Prod.
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600,
+        # ssl_require=False,
+        ssl_require=True # On Render, for Prod.
+    )
+}
 
 from urllib.parse import urlparse
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': config('DB_PORT'),
-        }
-    }
-else:
-    # Production DB from Render
-    result = urlparse(config('DATABASE_URL'))
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': result.path[1:],
-            'USER': result.username,
-            'PASSWORD': result.password,
-            'HOST': result.hostname,
-            'PORT': result.port,
-        }
-    }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': config('DB_NAME'),
+#             'USER': config('DB_USER'),
+#             'PASSWORD': config('DB_PASSWORD'),
+#             'HOST': config('DB_HOST'),
+#             'PORT': config('DB_PORT'),
+#         }
+#     }
+# else:
+#     # Production DB from Render
+#     result = urlparse(config('DATABASE_URL'))
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': result.path[1:],
+#             'USER': result.username,
+#             'PASSWORD': result.password,
+#             'HOST': result.hostname,
+#             'PORT': result.port,
+#         }
+#     }
 
 
 # Password validation
@@ -202,8 +201,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / 'static'
 STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATICFILES_DIRS = [
+#     'greatkart/static',
+# ]
 STATICFILES_DIRS = [
-    'greatkart/static',
+    BASE_DIR / 'greatkart' / 'static',
 ]
 
 

@@ -180,7 +180,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 #     'greatkart/static',
 # ]
 STATICFILES_DIRS = [
-    BASE_DIR / 'greatkart' / 'static',  # your app-level static folder
+    'greatkart/staticfiles',  # your app-level static folder
 ]
 
 # WhiteNoise settings (optional but recommended)

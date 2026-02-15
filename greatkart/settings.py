@@ -29,15 +29,17 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=lambda v: [s.strip() for s in v.split(',')])
-
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='greatkart-j4lu.onrender.com',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 # New: CSRF Trusted Origins
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS',
-    cast=lambda v: [s.strip() for s in v.split(',')],
-    default=''
+    default='https://greatkart-j4lu.onrender.com',
+    cast=lambda v: [s.strip() for s in v.split(',')]
 )
 
 

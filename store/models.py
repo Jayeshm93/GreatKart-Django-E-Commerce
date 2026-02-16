@@ -19,8 +19,7 @@ class Product(models.Model):
         return reverse('product_detail', args=[self.category.slug, self.slug])
 
     def __str__(self):
-        # return self.product_name
-        return f"{self.product_name} - {self.category.name if self.category else 'No Product'}"
+        return self.product_name
 
 
 class VariationManager(models.Manager):

@@ -65,6 +65,9 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +79,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'greatkart.urls'
@@ -184,6 +186,17 @@ STATICFILES_DIRS = [
 # Media files config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+import cloudinary
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': config.get('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 from django.contrib.messages import constants as messages

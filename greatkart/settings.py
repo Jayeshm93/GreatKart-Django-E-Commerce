@@ -191,9 +191,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 import cloudinary
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': config.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': config.get('CLOUDINARY_API_SECRET'),
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
